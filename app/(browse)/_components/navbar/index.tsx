@@ -5,10 +5,11 @@ import Link from "next/link";
 import { Logo } from "./logo";
 import { Actions } from "./actions";
 import { Button } from "@/components/ui/button";
-import { Sun, Crown } from "lucide-react";
+import { Crown, Sun } from "lucide-react";
 import { Search } from "./search";
 import { PrimeBadge } from "@/components/prime/prime-badge";
 import { getSelf } from "@/lib/auth-service";
+import { UserMenu } from "@/components/navbar/user-menu";
 
 export async function Navbar() {
   let user = null;
@@ -24,17 +25,19 @@ export async function Navbar() {
       <Logo />
       <Search />
       <div className="flex items-center gap-3">
-        {/* Botón de Solcitos - Azul Celeste */}
-        <Link href="/showcase" passHref>
-          <Button
-            variant="secondary"
-            className="flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-500 hover:to-cyan-600 text-white shadow-lg shadow-cyan-500/20 transition-all"
-          >
-            {/* <Sun className="h-4 w-4 text-cyan-100" /> */}
-            <span className="hidden sm:inline font-semibold">Comprar Solcitos</span>
-            <span className="sm:hidden font-semibold">Solcitos</span>
-          </Button>
-        </Link>
+        {/* Botón de Solcitos - Solo visible si está logueado */}
+        {user && (
+          <Link href="/showcase" passHref>
+            <Button
+              variant="secondary"
+              className="flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-500 hover:to-cyan-600 text-white shadow-lg shadow-cyan-500/20 transition-all"
+            >
+              <Sun />
+              <span className="hidden sm:inline font-semibold">Dile adiós a la publicidad de forma gratuita</span>
+              <span className="sm:hidden font-semibold"></span>
+            </Button>
+          </Link>
+        )}
 
         {/* Prime Button o Badge */}
         {user && (
@@ -58,14 +61,13 @@ export async function Navbar() {
                 className="flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-500 hover:to-cyan-600 text-white shadow-lg shadow-cyan-500/20 transition-all"
               >
                 <Crown className="h-4 w-4" />
-                <span className="hidden sm:inline">Obtener Prime</span>
-                <span className="sm:hidden">Prime</span>
               </Button>
             </Link>
           )
         )}
 
-        <Actions />
+        {/* Mostrar UserMenu si no está autenticado, o Actions si lo está */}
+        {user ? <Actions /> : <UserMenu />}
       </div>
     </div>
   );

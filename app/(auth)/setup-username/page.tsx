@@ -60,7 +60,7 @@ export default function SetupPage() {
       <Dialog open={showTerms} onOpenChange={() => router.push("/")}>
         <DialogContent className="max-w-2xl max-h-[90vh]">
           <DialogHeader>
-            <DialogTitle>Términos y Condiciones – RULO</DialogTitle>
+            <DialogTitle>Términos y Condiciones – Facugo Stream</DialogTitle>
           </DialogHeader>
 
           <ScrollArea className="h-[400px] pr-4">
@@ -69,7 +69,7 @@ export default function SetupPage() {
                 Fecha: {new Date().toLocaleDateString()}
               </p>
               
-              <p>Bienvenido a RULO. Al usar la plataforma, aceptás estos términos.</p>
+              <p>Bienvenido a Facugo Stream. Al usar la plataforma, aceptás estos términos.</p>
               
               <div>
                 <h3 className="font-semibold">1. Requisitos de Edad</h3>
@@ -83,7 +83,7 @@ export default function SetupPage() {
 
               <div>
                 <h3 className="font-semibold">3. Monetización</h3>
-                <p>Menores pueden monetizar con consentimiento parental. 97% creador, 3% RULO.</p>
+                <p>Menores pueden monetizar con consentimiento parental. 97% creador, 3% Facugo.</p>
               </div>
 
               <div>
@@ -93,7 +93,7 @@ export default function SetupPage() {
 
               <div>
                 <h3 className="font-semibold">5. Suspensión</h3>
-                <p>RULO puede suspender cuentas que violen estos términos.</p>
+                <p>Facugo puede suspender cuentas que violen estos términos.</p>
               </div>
 
               <div>

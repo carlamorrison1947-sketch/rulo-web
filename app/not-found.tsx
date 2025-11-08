@@ -6,8 +6,7 @@ import { Button } from "@/components/ui/button";
 export default function NotFoundPage() {
   return (
     <div className="h-full flex flex-col space-y-4 items-center justify-center text-muted-foreground">
-      <h1 className="text-4xl">404</h1>
-      <p>We couldn&apos;t find the page you were looking for.</p>
+      <h1 className="text-4xl">Proximamente</h1>
       <Button variant="secondary" asChild>
         <Link href="/">Go back home</Link>
       </Button>

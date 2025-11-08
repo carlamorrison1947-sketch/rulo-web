@@ -85,11 +85,11 @@ const VideoRenderer = ({ hostName }: { hostName: string }) => {
           </div>
           
           {/* Tip */}
-          <div className="bg-gray-800/50 rounded-lg p-4 max-w-md mx-auto">
+          {/* <div className="bg-gray-800/50 rounded-lg p-4 max-w-md mx-auto">
             <p className="text-gray-300 text-xs">
               💡 Los streamers pueden iniciar su transmisión usando OBS Studio con sus credenciales de stream
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     );

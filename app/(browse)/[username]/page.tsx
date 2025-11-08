@@ -13,10 +13,11 @@ import { SponsorSection } from "@/components/sponsors/sponsor-section";
 import { VerifiedBadge } from "@/components/verified-badge";
 import { LiveChat } from "@/components/chat/live-chat";
 import { SubscribeButton } from "@/components/chat/chat-actions";
-import { Users, Calendar, Eye, TrendingUp, Sparkles, Clock, Star } from "lucide-react";
+import { Users, Calendar, Eye, TrendingUp, Sparkles, Clock, Star, Gift } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { PrimeBadge } from "@/components/prime/prime-badge";
-import Link from "next/link"; // ✅ AGREGAR IMPORT
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface UserPageProps {
   params: {
@@ -57,14 +58,14 @@ export default async function UserPage({ params }: UserPageProps) {
   let isFollowing = false;
   let isSelf = false;
   let currentUser = null;
-  let userBalance = 0; // ✅ AGREGAR balance
+  let userBalance = 0;
   
   try {
     const self = await getSelf();
     currentUser = self;
     isFollowing = await isFollowingUser(user.id);
     isSelf = self.id === user.id;
-    userBalance = self.solcitosBalance; // ✅ OBTENER BALANCE
+    userBalance = self.solcitosBalance;
   } catch {
     // Usuario no autenticado
   }
@@ -123,12 +124,6 @@ export default async function UserPage({ params }: UserPageProps) {
                   {user.isVerified && <VerifiedBadge size="md" />}
                   {user.isPrime && <PrimeBadge variant="compact" />}
                 </div>
-
-                {user.bio && (
-                  <p className="text-muted-foreground max-w-2xl mt-1 line-clamp-2 cursor-pointer group-hover:text-foreground transition-colors">
-                    {user.bio}
-                  </p>
-                )}
               </Link>
 
               {/* Stats - No clickeables */}
@@ -164,9 +159,10 @@ export default async function UserPage({ params }: UserPageProps) {
               </div>
             </div>
 
-            {/* Botones de Follow y Suscribirse */}
-            {!isSelf && (
-              <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
+          {/* Botones de Follow, Suscribirse y Regalar Sub */}
+          {!isSelf && (
+            <div className="flex flex-col gap-2 w-full md:w-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full md:min-w-[450px]">
                 <FollowButton
                   userId={user.id}
                   isFollowing={isFollowing}
@@ -179,8 +175,17 @@ export default async function UserPage({ params }: UserPageProps) {
                   isPrime={currentUser?.isPrime}
                   size="md"
                 />
+                <Button
+                  size="default"
+                  variant="outline"
+                  className="border-cyan-500/30 hover:bg-cyan-500/10 hover:border-cyan-500/50 text-cyan-600 dark:text-cyan-400 w-full"
+                >
+                  <Gift className="h-4 w-4 mr-2" />
+                  <span className="whitespace-nowrap">Regalar una Sub</span>
+                </Button>
               </div>
-            )}
+            </div>
+          )}
           </div>
         </div>
       </div>
@@ -236,25 +241,54 @@ export default async function UserPage({ params }: UserPageProps) {
                     </div>
                   </div>
                 </div>
-
-                {user.bio && (
-                  <div className="border-t border-cyan-500/10 pt-4 mt-4">
-                    <h3 className="font-semibold mb-2 text-cyan-600 dark:text-cyan-400 flex items-center gap-2">
-                      <Sparkles className="h-4 w-4" />
-                      Sobre este canal
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {user.bio}
-                    </p>
-                  </div>
-                )}
               </CardContent>
             </Card>
+
+          {/* SECCIÓN: Acerca de / Biografía - SIEMPRE VISIBLE */}
+          <Card className="border-cyan-500/20">
+            <CardContent className="p-6">
+              <h3 className="font-semibold mb-3 text-cyan-600 dark:text-cyan-400 flex items-center gap-2">
+                <Sparkles className="h-5 w-5" />
+                Acerca de
+              </h3>
+              {user.bio ? (
+                <>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {user.bio}
+                  </p>
+                  <Link href={`/${username}/about`}>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="mt-4 text-cyan-600 hover:text-cyan-500 hover:bg-cyan-500/10"
+                    >
+                      Ver más información →
+                    </Button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <p className="text-muted-foreground italic leading-relaxed">
+                    {user.username} aún no ha agregado una biografía.
+                  </p>
+                  <Link href={`/${username}/about`}>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="mt-4 text-cyan-600 hover:text-cyan-500 hover:bg-cyan-500/10"
+                    >
+                      Ver perfil completo →
+                    </Button>
+                  </Link>
+                </>
+              )}
+            </CardContent>
+          </Card>
           </div>
 
           {/* Sidebar - Chat y Stats */}
           <div className="lg:col-span-1 space-y-4">
-            {/* ✅ CHAT EN VIVO FUNCIONAL */}
+            {/* CHAT EN VIVO FUNCIONAL */}
             {streamId && (
               <Card className="border-cyan-500/20">
                 <div className="h-[500px]">
@@ -267,7 +301,7 @@ export default async function UserPage({ params }: UserPageProps) {
                     isOwner={isSelf}
                     viewerCount={averageViewers}
                     currentUserId={currentUser?.id}
-                    userBalance={userBalance} // ✅ PASAR BALANCE
+                    userBalance={userBalance}
                   />
                 </div>
               </Card>
@@ -359,7 +393,7 @@ export async function generateMetadata({ params }: UserPageProps) {
   }
 
   return {
-    title: `${user.username} - Stream en vivo | Rulo`,
-    description: user.bio || `Mira el stream de ${user.username} en Rulo`,
+    title: `${user.username} - Stream en vivo | Facugo Stream`,
+    description: user.bio || `Mira el stream de ${user.username} en Facugo Stream`,
   };
 }

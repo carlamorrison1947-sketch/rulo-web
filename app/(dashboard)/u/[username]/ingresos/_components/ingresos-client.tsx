@@ -313,7 +313,7 @@ export function IngresosClient({ user, stats, transactions }: IngresosClientProp
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-2xl">
               <Wallet className="h-6 w-6" />
-              Cómo Retirar Dinero de Rulo
+              Cómo Retirar Dinero de Facugo Stream
             </DialogTitle>
             <DialogDescription>
               Sigue estos pasos para retirar tus ganancias
@@ -324,10 +324,10 @@ export function IngresosClient({ user, stats, transactions }: IngresosClientProp
             {/* Intro */}
             <div className="bg-muted p-4 rounded-lg">
               <p className="text-sm">
-                Para retirar dinero de Rulo, primero debes tener tus datos de pago 
+                Para retirar dinero de Facugo Stream, primero debes tener tus datos de pago 
                 configurados y cumplir con el pago mínimo establecido por la plataforma. 
                 Una vez que tengas esto, ve a la sección de pagos o panel de creador en 
-                tu cuenta de Rulo, solicita el retiro de fondos y selecciona tu método 
+                tu cuenta de Facugo Stream, solicita el retiro de fondos y selecciona tu método 
                 de pago asociado, como una billetera digital o cuenta bancaria.
               </p>
             </div>

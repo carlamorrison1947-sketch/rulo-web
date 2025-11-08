@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/theme-provider";
 import { WhatsAppSupport } from "@/components/whatsapp-support";
 import { AdminButton } from "@/components/admin-button";
+import { JoinBanner } from "@/components/join-banner";
 
 import "./globals.css";
 
@@ -14,10 +15,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Rulo",
-    default: "Rulo",
+    template: "%s | Facugo Stream",
+    default: "Facugo Stream",
   },
-  description: "Rulo Stream Platform",
+  description: "Stream Platform",
 };
 
 export default function RootLayout({
@@ -37,6 +38,8 @@ export default function RootLayout({
             {/* ✅ Cambiar theme a "dark" para que combine con tu app */}
             <Toaster theme="dark" position="bottom-right" richColors />
             <AdminButton />
+            {/* <WhatsAppSupport /> */}
+            <JoinBanner />
             {children}
           </ThemeProvider>
         </body>

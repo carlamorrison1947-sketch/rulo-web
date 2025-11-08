@@ -105,7 +105,7 @@ export default async function LogrosPage({
       needsTwoFactor: true,
     },
     {
-      title: "Socio RULO",
+      title: "Socio",
       subtitle: "Nivel 3",
       description: "Creador profesional con comunidad sólida",
       icon: Crown,
@@ -137,7 +137,7 @@ export default async function LogrosPage({
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <Trophy className="h-8 w-8 text-primary" />
-            Programa de Creadores RULO
+            Programa de Creadores Facugo Stream
           </h1>
           <p className="text-muted-foreground mt-1">
             Desbloquea niveles y monetiza tu contenido

@@ -18,10 +18,13 @@ import {
   ArrowLeft,
   TrendingUp,
   Star,
-  Heart
+  Heart,
+  Video,
+  CalendarDays
 } from "lucide-react";
 import { PrimeBadge } from "@/components/prime/prime-badge";
 import Link from "next/link";
+import { NavigationMenu } from "./navigation-menu"; // Nuevo componente client
 
 interface AboutPageProps {
   params: {
@@ -144,27 +147,8 @@ export default async function AboutPage({ params }: AboutPageProps) {
                 </div>
               </Card>
 
-              {/* Navegación de tabs */}
-              <Card className="border-cyan-500/20">
-                <div className="p-2">
-                  <Link href={`/${username}`}>
-                    <Button 
-                      variant="ghost" 
-                      className="w-full justify-start hover:bg-cyan-500/10 hover:text-cyan-600"
-                    >
-                      <TrendingUp className="h-4 w-4 mr-2" />
-                      Inicio
-                    </Button>
-                  </Link>
-                  <Button 
-                    variant="ghost" 
-                    className="w-full justify-start bg-cyan-500/10 text-cyan-600 hover:bg-cyan-500/20"
-                  >
-                    <FileText className="h-4 w-4 mr-2" />
-                    Acerca de
-                  </Button>
-                </div>
-              </Card>
+              {/* Navegación de tabs - Componente client */}
+              <NavigationMenu username={username} />
             </div>
 
             {/* Contenido principal */}
@@ -368,7 +352,7 @@ export async function generateMetadata({ params }: AboutPageProps) {
   }
 
   return {
-    title: `Acerca de ${user.username} | Rulo`,
+    title: `Acerca de ${user.username} | Facugo Stream`,
     description: user.bio || `Conoce más sobre el canal de ${user.username}`,
   };
 }

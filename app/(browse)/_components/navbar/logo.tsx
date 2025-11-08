@@ -14,11 +14,11 @@ export function Logo() {
     <Link href="/">
       <div className="flex items-center gap-x-4 hover:opacity-75 transition">
         <div className="rounded-full p-1 mr-12 shrink-0 lg:mr-0 lg:shrink">
-          <Image src="/rulo.png" alt="GameHub" height="62" width="62" />
+          <Image src="/facugo.jpg" alt="GameHub" height="62" width="62" className="rounded-full"/>
         </div>
         <div className={cn(font.className, "hidden lg:block")}>
           <div className="flex items-center gap-2">
-            <p className="text-lg font-semibold">Rulo</p>
+            <p className="text-lg font-semibold">Facugo Stream</p>
             <span className="bg-gradient-to-r from-cyan-500 to-cyan-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-md shadow-cyan-500/40">
               BETA
             </span>

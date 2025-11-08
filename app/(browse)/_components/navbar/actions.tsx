@@ -3,7 +3,8 @@ import { currentUser, SignInButton, UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { getSelf, needsUsernameSetup } from "@/lib/auth-service";
-import { Clapperboard, Settings } from "lucide-react";
+import { Settings } from "lucide-react";
+import { AuthUserMenu } from "@/components/navbar/auth-user-menu";
 
 export async function Actions() {
   const user = await currentUser();
@@ -37,20 +38,14 @@ export async function Actions() {
 
   return (
     <div className="flex items-center gap-x-2 ml-4 lg:ml-0">
-      <Link href={`/u/${dbUser.username}/studio`}>
-        <Button 
-          size="sm" 
-          className="text-muted-foreground hover:text-primary"
-          variant={dbUser.isStreamer ? "default" : "secondary"}
-        >
-          <Clapperboard className="h-5 w-5 lg:mr-2" />
-          <span className="hidden lg:block">
-            {dbUser.isStreamer ? "Dashboard" : "Ser Streamer"}
-          </span>
-        </Button>
-      </Link>
-      
-      <UserButton afterSignOutUrl="/" />
+      {/* Solo el menú personalizado */}
+      <AuthUserMenu 
+        user={{
+          username: dbUser.username,
+          imageUrl: user.imageUrl,
+          isStreamer: dbUser.isStreamer
+        }}
+      />
     </div>
   );
 }

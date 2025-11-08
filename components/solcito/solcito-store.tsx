@@ -137,7 +137,7 @@ export function SolcitoStore({ currentBalance = 0 }: SolcitoStoreProps) {
               <DialogHeader>
                 <DialogTitle className="flex items-center gap-2 text-2xl">
                   <ScrollText className="h-6 w-6 text-cyan-500" />
-                  Términos de Venta de Rulo Streaming
+                  Términos de Venta de Facugo Streaming
                 </DialogTitle>
                 <DialogDescription>
                   Última actualización: {new Date().toLocaleDateString('es-AR', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -146,7 +146,7 @@ export function SolcitoStore({ currentBalance = 0 }: SolcitoStoreProps) {
               
               <div className="space-y-4 text-sm">
                 <p>
-                  Bienvenido a <strong>Rulo Streaming</strong>. Al realizar una compra dentro de Rulo, aceptás estos Términos de Venta.
+                  Bienvenido a <strong>Facugo Streaming</strong>. Al realizar una compra dentro de Facugo Stream, aceptás estos Términos de Venta.
                 </p>
 
                 <section>
@@ -170,7 +170,7 @@ export function SolcitoStore({ currentBalance = 0 }: SolcitoStoreProps) {
                 <section>
                   <h3 className="font-semibold text-base mb-2 text-cyan-700 dark:text-cyan-400">3. Sobre los Solcitos</h3>
                   <ul className="list-disc list-inside ml-4 space-y-1">
-                    <li>Moneda virtual exclusiva de Rulo</li>
+                    <li>Moneda virtual exclusiva de Facugo</li>
                     <li>No tienen valor fuera de la plataforma</li>
                     <li>No son reembolsables (salvo error técnico)</li>
                     <li>No son transferibles</li>
