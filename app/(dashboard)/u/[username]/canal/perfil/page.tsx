@@ -246,7 +246,7 @@ export default async function CanalPerfilPage({
                 id="username"
                 name="username"
                 defaultValue={self.username}
-                placeholder="ej: FacugoGamer"
+                placeholder="ej: FacuGo!Gamer"
                 required
                 minLength={3}
                 maxLength={20}

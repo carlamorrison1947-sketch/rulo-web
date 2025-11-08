@@ -33,7 +33,6 @@ export async function Navbar() {
               className="flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-500 hover:to-cyan-600 text-white shadow-lg shadow-cyan-500/20 transition-all"
             >
               <Sun />
-              <span className="hidden sm:inline font-semibold">Dile adiós a la publicidad de forma gratuita</span>
               <span className="sm:hidden font-semibold"></span>
             </Button>
           </Link>

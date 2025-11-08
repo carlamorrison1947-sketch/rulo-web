@@ -15,8 +15,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Facugo Stream",
-    default: "Facugo Stream",
+    template: "%s | FacuGo! Stream",
+    default: "FacuGo! Stream",
   },
   description: "Stream Platform",
 };

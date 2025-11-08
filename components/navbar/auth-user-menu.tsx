@@ -184,7 +184,7 @@ export function AuthUserMenu({ user }: AuthUserMenuProps) {
                 onClick={() => setIsOpen(false)}
               >
                 <Wallet className="h-5 w-5 mr-3" />
-                <span>Facugo Wallet</span>
+                <span>FacuGo! Wallet</span>
               </button>
             </Link>
 

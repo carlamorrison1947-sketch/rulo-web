@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Send, Settings, Users, Trash2, Shield } from "lucide-react";
+import { Send, Settings, Users, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import { EmojiButton, GiftSolcitosButton, BuySolcitosButton, SubscribeButton } from "@/components/chat/chat-actions"; // ✅ AGREGAR SubscribeButton
+import { EmojiButton, GiftSolcitosButton, BuySolcitosButton, SubscribeButton } from "@/components/chat/chat-actions";
 import { SolcitoIcon } from "@/components/solcito-icon";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
@@ -101,13 +101,9 @@ export function LiveChat({
   const handleSendMessage = async () => {
     if (!message.trim() || isLoading) return;
 
-    if (!isFollowing && settings.isChatFollowersOnly && !isOwner) {
-      toast.error("Debes seguir al canal para chatear");
-      return;
-    }
-
-    if (!isPrime && settings.isChatSubscribersOnly && !isOwner) {
-      toast.error("Solo los suscriptores pueden chatear");
+    // Solo verificar si el chat está habilitado
+    if (!settings.isChatEnabled && !isOwner) {
+      toast.error("El chat está desactivado");
       return;
     }
 
@@ -163,30 +159,6 @@ export function LiveChat({
         const newSettings = await res.json();
         setSettings(newSettings);
         toast.success(newSettings.isChatEnabled ? "Chat activado" : "Chat desactivado");
-      }
-    } catch (error) {
-      toast.error("No se pudo cambiar la configuración");
-    }
-  };
-
-  const toggleFollowersOnly = async () => {
-    try {
-      const res = await fetch(`/api/chat/${streamId}/settings`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          isChatFollowersOnly: !settings.isChatFollowersOnly,
-        }),
-      });
-
-      if (res.ok) {
-        const newSettings = await res.json();
-        setSettings(newSettings);
-        toast.success(
-          newSettings.isChatFollowersOnly
-            ? "Modo solo seguidores activado"
-            : "Modo solo seguidores desactivado"
-        );
         setShowSettings(false);
       }
     } catch (error) {
@@ -210,19 +182,8 @@ export function LiveChat({
     }
   };
 
-  const canChat = settings.isChatEnabled && 
-                  (isOwner || 
-                   (isFollowing && !settings.isChatFollowersOnly) ||
-                   (isFollowing && !settings.isChatSubscribersOnly) ||
-                   (isPrime && settings.isChatSubscribersOnly));
-
-  // ✅ DEBUG: Ver valores
-  console.log('LiveChat Debug:', {
-    isOwner,
-    isPrime,
-    streamerId,
-    streamerName,
-  });
+  // SIMPLIFICADO: Solo verificar si el chat está habilitado
+  const canChat = settings.isChatEnabled || isOwner;
 
   return (
     <div className="flex flex-col h-full bg-background">
@@ -236,9 +197,6 @@ export function LiveChat({
             <span className="text-xs px-2 py-0.5 bg-red-500/20 text-red-500 rounded">
               Desactivado
             </span>
-          )}
-          {settings.isChatFollowersOnly && (
-            <Shield className="h-4 w-4 text-cyan-500" />
           )}
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
             <Users className="h-3 w-3" />
@@ -270,14 +228,6 @@ export function LiveChat({
                     className="w-full px-4 py-2 text-left text-sm hover:bg-cyan-500/10 transition-colors"
                   >
                     {settings.isChatEnabled ? "Desactivar chat" : "Activar chat"}
-                  </button>
-                  <button
-                    onClick={toggleFollowersOnly}
-                    className="w-full px-4 py-2 text-left text-sm hover:bg-cyan-500/10 transition-colors"
-                  >
-                    {settings.isChatFollowersOnly
-                      ? "Permitir todos"
-                      : "Solo seguidores"}
                   </button>
                   <div className="border-t border-cyan-500/20" />
                   <button
@@ -326,20 +276,10 @@ export function LiveChat({
 
       {/* Input del Chat */}
       <div className="p-3 border-t border-cyan-500/20 space-y-2">
-        {!settings.isChatEnabled && (
+        {!settings.isChatEnabled && !isOwner && (
           <div className="p-2 rounded-lg bg-red-500/10 border border-red-500/20">
             <p className="text-xs text-red-500 text-center font-medium">
               El chat está desactivado
-            </p>
-          </div>
-        )}
-        
-        {settings.isChatEnabled && !canChat && (
-          <div className="p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
-            <p className="text-xs text-cyan-500 text-center font-medium">
-              {settings.isChatFollowersOnly
-                ? `Debes seguir a ${streamerName} para chatear`
-                : `Solo suscriptores pueden chatear`}
             </p>
           </div>
         )}

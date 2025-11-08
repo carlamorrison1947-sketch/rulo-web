@@ -18,7 +18,7 @@ export function Logo() {
         </div>
         <div className={cn(font.className, "hidden lg:block")}>
           <div className="flex items-center gap-2">
-            <p className="text-lg font-semibold">Facugo Stream</p>
+            <p className="text-lg font-semibold">FacuGo! Stream</p>
             <span className="bg-gradient-to-r from-cyan-500 to-cyan-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-md shadow-cyan-500/40">
               BETA
             </span>

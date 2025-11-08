@@ -23,7 +23,7 @@ export function JoinBanner() {
           </div>
           <div className="flex-1 min-w-0">
             <h3 className="text-white font-semibold text-sm sm:text-base truncate">
-              ¡Únete a la comunidad de Facugo Stream!
+              ¡Únete a la comunidad de FacuGo! Stream!
             </h3>
             <p className="text-cyan-100 text-xs sm:text-sm truncate">
               Descubre las mejores transmisiones en vivo en cualquier lugar.

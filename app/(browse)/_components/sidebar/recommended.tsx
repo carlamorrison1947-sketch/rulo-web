@@ -1,3 +1,4 @@
+// components/sidebar/recommended.tsx
 "use client";
 
 import React from "react";
@@ -25,16 +26,19 @@ export function Recommended({
           </p>
         </div>
       )}
-      <ul className="space-y-2 px-2">
-        {data.map((user) => (
-          <UserItem
-            key={user.id}
-            imageUrl={user.imageUrl}
-            username={user.username}
-            isLive={user.stream?.isLive}
-          />
-        ))}
-      </ul>
+      {/* Contenedor con scroll - SOLO PARA RECOMENDADOS */}
+      <div className="max-h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-cyan-500/20 scrollbar-track-transparent hover:scrollbar-thumb-cyan-500/40 pr-1">
+        <ul className="space-y-2 px-2">
+          {data.map((user) => (
+            <UserItem
+              key={user.id}
+              imageUrl={user.imageUrl}
+              username={user.username}
+              isLive={user.stream?.isLive}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

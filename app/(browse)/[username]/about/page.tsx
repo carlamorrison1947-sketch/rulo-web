@@ -352,7 +352,7 @@ export async function generateMetadata({ params }: AboutPageProps) {
   }
 
   return {
-    title: `Acerca de ${user.username} | Facugo Stream`,
+    title: `Acerca de ${user.username} | FacuGo! Stream`,
     description: user.bio || `Conoce más sobre el canal de ${user.username}`,
   };
 }

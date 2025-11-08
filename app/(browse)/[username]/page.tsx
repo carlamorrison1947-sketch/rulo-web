@@ -393,7 +393,7 @@ export async function generateMetadata({ params }: UserPageProps) {
   }
 
   return {
-    title: `${user.username} - Stream en vivo | Facugo Stream`,
-    description: user.bio || `Mira el stream de ${user.username} en Facugo Stream`,
+    title: `${user.username} - Stream en vivo | FacuGo! Stream`,
+    description: user.bio || `Mira el stream de ${user.username} en FacuGo! Stream`,
   };
 }

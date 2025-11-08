@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
           },
         ],
         application_context: {
-          brand_name: 'Facugo Stream',
+          brand_name: 'FacuGo! Stream',
           landing_page: 'NO_PREFERENCE',
           user_action: 'PAY_NOW',
           return_url: `${baseUrl}/api/paypal/success`,

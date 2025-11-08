@@ -62,7 +62,7 @@ export default async function LogrosPage({
 
   const achievements = [
     {
-      title: "Creador RULO",
+      title: "Creador Go!",
       subtitle: "Nivel 1",
       description: "Acceso inicial a monetización",
       icon: Star,
@@ -75,14 +75,14 @@ export default async function LogrosPage({
         { label: "Seguidores mínimos", value: stats.totalFollowers, target: 10, unit: "seguidores", icon: Heart, isComplete: creadorReqs[2].isComplete },
       ],
       benefits: [
-        "Suscripciones activas (97% creador, 3% RULO)",
+        "Suscripciones activas (97% creador, 3% FacuGo!!)",
         "Insignia de Creador RULO",
         "Dashboard de estadísticas y monetización",
         "Aparición en secciones destacadas",
       ],
     },
     {
-      title: "Verificación RULO",
+      title: "Verificación FacuGo!",
       subtitle: "Nivel 2",
       description: "Creador activo y confiable",
       icon: CheckCircle2,
@@ -96,7 +96,7 @@ export default async function LogrosPage({
         { label: "Usuarios diferentes chateando (30 días)", value: stats.uniqueChattersLast30Days, target: 5, unit: "usuarios", icon: MessageSquare, isComplete: verificacionReqs[3].isComplete },
       ],
       benefits: [
-        "Insignia Verificado RULO",
+        "Insignia Verificado FacuGo!",
         "Prioridad en descubrimiento",
         "Soporte directo",
         "Acceso early a nuevas features",
@@ -137,7 +137,7 @@ export default async function LogrosPage({
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <Trophy className="h-8 w-8 text-primary" />
-            Programa de Creadores Facugo Stream
+            Programa de Creadores FacuGo! Stream
           </h1>
           <p className="text-muted-foreground mt-1">
             Desbloquea niveles y monetiza tu contenido
