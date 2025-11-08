@@ -9,7 +9,6 @@ const PAYPAL_API = process.env.PAYPAL_MODE === 'production'
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
 const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET;
 
-// Generar access token de PayPal
 async function getPayPalAccessToken() {
   const auth = Buffer.from(`${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`).toString('base64');
   
@@ -46,10 +45,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Obtener access token
     const accessToken = await getPayPalAccessToken();
 
-    // Crear la orden en PayPal
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+
     const orderResponse = await fetch(`${PAYPAL_API}/v2/checkout/orders`, {
       method: 'POST',
       headers: {
@@ -65,15 +64,15 @@ export async function POST(req: NextRequest) {
               value: amount.toFixed(2),
             },
             description: `${solcitos} Solcitos`,
-            custom_id: `${user.id}|${packageId}|${solcitos}`, // Para identificar después
+            custom_id: `${user.id}|${packageId}|${solcitos}`,
           },
         ],
         application_context: {
-          brand_name: 'Tu Plataforma de Streaming',
+          brand_name: 'Facugo Stream',
           landing_page: 'NO_PREFERENCE',
           user_action: 'PAY_NOW',
-          return_url: `${process.env.NEXT_PUBLIC_APP_URL}/showcase?success=true`,
-          cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/showcase?cancelled=true`,
+          return_url: `${baseUrl}/api/paypal/success`,
+          cancel_url: `${baseUrl}/showcase?cancelled=true`,
         },
       }),
     });
@@ -83,12 +82,11 @@ export async function POST(req: NextRequest) {
     if (!orderResponse.ok) {
       console.error('PayPal error:', orderData);
       return NextResponse.json(
-        { error: 'Error al crear orden en PayPal' },
+        { error: 'Error al crear orden en PayPal', details: orderData },
         { status: 500 }
       );
     }
 
-    // Obtener el link de aprobación
     const approvalUrl = orderData.links.find(
       (link: any) => link.rel === 'approve'
     )?.href;
